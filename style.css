@@ -120,7 +120,7 @@ a div.log-in-button {
 
 a .log-in-button:hover,
 .add-book-button:hover {
-	transform: scale(1.1);
+	transform: scale(1.03);
 	background-color: var(--primary-color-darker);
 }
 
@@ -156,8 +156,9 @@ a .log-in-button:hover,
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	grid-template-rows: repeat(auto-fill, minmax(170px, 1fr));
 	gap: 16px;
+	overflow: auto;
 
-	padding: 16px;
+	padding: 0 16px;
 }
 
 .book-card {
