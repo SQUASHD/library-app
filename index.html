@@ -9,14 +9,26 @@
   <title>My Library</title>
 </head>
 <body>
+  <div id="myModal" class="modal">
+    <div id="modal-content">
+      <span class="close">&times;</span>
+      <form class="add-book-form" action="" id="add-book-form">
+        <input type="text" name="title" id="title" placeholder="Title">
+        <input type="text" name="author" id="author" placeholder="Author">
+        <input type="number" name="pageCount" id="pageCount" placeholder="Pages">
+        <input type="checkbox" name="read-check" id="read-check">
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
   <div class="main">
     <div class="header">
       <h1>my library</h1>
-      <div class="log-in-button-container"><a href=""><div class="log-in-button">Log In</div></a></div>
+      <div class="log-in-button-container"><div class="log-in-button">Log In</div></div>
     </div>
     <div class="main-content">
       <div class="add-book-row">
-        <a href=""><div class="add-book-button">+ Add Book</div></a>
+        <div class="add-book-button">+ Add Book</div>
       </div>
       <div class="books-grid">
         <div class="book-card">
