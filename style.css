@@ -75,34 +75,44 @@ a {
 	box-shadow: 0 3px 6px -6px gray;
 
 	display: grid;
-	grid-template-columns: 10px minmax(200px, 400px) 1fr minmax(200px, 400px) 10px;
+	grid-template-columns: minmax(10px, 40px) minmax(150px, 400px) 1fr minmax(150px, 400px) minmax(10px, 40px);
 	align-items: center;
-	justify-items: center;
 }
 
 .header h1 {
 	grid-column: 2 / 3;
 	font-size: 32px;
 	font-weight: 900;
+
+	display: grid;
+	justify-content: start;
 }
 
-.header .log-in-button {
+.header > a {
 	grid-column: -2 / -3;
 	
-	background-color: var(--primary-color);
-	border-radius: 14px;
-	box-shadow: 0 3px 6px -6px gray;
-	
 	padding: 16px;
+	display: grid;
+	justify-content: end;
 }
 
-.header .log-in-button a {
+.header > a div {
+	display: grid;
+	justify-content: center;
+	
+	background-color: var(--primary-color);
+	padding: 12px;
+	border-radius: 14px;
+	box-shadow: 0 3px 6px -6px gray;
+}
+
+.header a .log-in-button {
 	color: white;
 	font-weight: 500;
 }
 
-.header .log-in-button:hover {
-	transform: scale(1.04);
+.header > a:hover {
+	transform: scale(1.01);
 }
 
 .main-content {
