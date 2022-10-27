@@ -18,7 +18,7 @@ function addBookToLibrary(book) {
 }
 
 addBookBtn.onclick = function() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 }
 
 window.onclick = (e) => {
