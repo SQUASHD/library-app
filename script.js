@@ -28,6 +28,7 @@ function addBookToLibrary(book) {
 
 addBookBtn.onclick = function() {
   modal.style.display = "flex";
+  title.focus();
 }
 
 window.onclick = (e) => {
@@ -35,6 +36,12 @@ window.onclick = (e) => {
     modal.style.display = "none";
   }
 }
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    modal.style.display = "none";
+  } 
+})
 
 form.addEventListener("submit", (e) => {
   e.preventDefault()
