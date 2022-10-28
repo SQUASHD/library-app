@@ -32,8 +32,9 @@ window.onclick = (e) => {
   }
 }
 
-submitBtn.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault()
+
   const book = new Book(title.value, author.value, pageCount.value, readStatus.value)
   addBookToLibrary(book)
   modal.style.display = "none";
