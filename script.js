@@ -47,11 +47,11 @@ function createBookCard(book) {
   const bookCard = document.createElement("div")
   bookCard.classList.add("book-card")
   const title = document.createElement("h2")
-  title.textContent = book.title
+  title.textContent = `"${book.title}"`
   const author = document.createElement("p")
   author.textContent = book.author
   const pageCount = document.createElement("p")
-  pageCount.textContent = book.pageCount
+  pageCount.textContent = `${book.pageCount} pages`
   const readStatus = document.createElement("p")
   readStatus.textContent = book.readStatus
 
@@ -61,10 +61,10 @@ function createBookCard(book) {
   readStatusBtn.classList.add("book-btn")
   buttonGroup.appendChild(readStatusBtn)
   const removeBtn = document.createElement("div")
-  removeBtn.classList.add("book-btn", "remove-btn")
+  removeBtn.classList.add("book-btn", "remove-button")
   buttonGroup.appendChild(removeBtn)
 
-  if(readStatus.value) {
+  if(book.readStatus) {
     readStatusBtn.textContent = "Read"
     readStatusBtn.classList.add("read")
   }
@@ -75,20 +75,31 @@ function createBookCard(book) {
 
   removeBtn.textContent = "Remove"
 
+  readStatusBtn.addEventListener("click", () => {
+    toggleReadStatus(readStatusBtn, book);
+  })
+
   removeBtn.addEventListener("click", () => {
     bookCard.remove()
   })
 
-  readStatusBtn.addEventListener("click", () => {
-    if(readStatusBtn.classList.contains("read")) {
-      readStatusBtn.textContent = "Not Read"
-      readStatusBtn.classList.remove("read")
-      readStatusBtn.classList.add("not-read")
-      book.readStatus = !book.readStatus
-    }
-  })
 
   
   bookCard.append(title, author, pageCount, buttonGroup)
   booksGrid.append(bookCard)
+}
+
+function toggleReadStatus(readStatusBtn, book) {
+  if (readStatusBtn.classList.contains("read")) {
+    readStatusBtn.textContent = "Not Read";
+    readStatusBtn.classList.remove("read");
+    readStatusBtn.classList.add("not-read");
+    book.readStatus = !book.readStatus;
+  }
+  else {
+    readStatusBtn.textContent = "Read";
+    readStatusBtn.classList.remove("not-read");
+    readStatusBtn.classList.add("read");
+    book.readStatus = !book.readStatus;
+  }
 }
