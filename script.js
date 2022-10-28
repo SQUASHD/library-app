@@ -23,28 +23,23 @@ const readStatus = document.getElementById("read-status")
 
 let myLibrary = []
 
-function Book(title, author, pageCount, readStatus, generated = false) {
-  this.title = title
-  this.author = author
-  this.pageCount = pageCount
-  this.readStatus = Boolean(readStatus)
-  this.generated = generated
+const Book = (title, author, pageCount, readStatus, generated = false) => {
 
-  this.createBookCard = function() {
+  const createBookCard = () => {
     const bookCard = document.createElement("div")
     bookCard.classList.add("book-card")
 
     const bookTitle = document.createElement("h2")
     bookTitle.classList.add("book-title")
-    bookTitle.textContent = `"${this.title}"`
+    bookTitle.textContent = `"${title}"`
 
     const bookAuthor = document.createElement("h3")
     bookAuthor.classList.add("book-author")
-    bookAuthor.textContent = this.author
+    bookAuthor.textContent = author
 
     const bookPageCount = document.createElement("p")
     bookPageCount.classList.add("book-page-count")
-    bookPageCount.textContent = this.pageCount + " pages"
+    bookPageCount.textContent = pageCount + " pages"
 
     const buttonGroup = document.createElement("div")
     buttonGroup.classList.add("button-group")
@@ -55,7 +50,7 @@ function Book(title, author, pageCount, readStatus, generated = false) {
     removeBtn.classList.add("book-btn", "remove-button", "button")
     buttonGroup.appendChild(removeBtn)
 
-    if(this.readStatus) {
+    if(readStatus) {
       readStatusBtn.textContent = "Read"
       readStatusBtn.classList.add("read")
     }
@@ -64,7 +59,7 @@ function Book(title, author, pageCount, readStatus, generated = false) {
       readStatusBtn.classList.add("not-read")
     }
 
-    if (this.generated) {
+    if (generated) {
       bookCard.classList.add("generated")
     }
 
@@ -103,9 +98,10 @@ function Book(title, author, pageCount, readStatus, generated = false) {
     }
   }
 
-  this.addBookToLibrary = function() {
-    myLibrary.push(this)
+  const addBookToLibrary = () => {
+    myLibrary.push(Book)
   }
+  return {title, author, pageCount, readStatus, generated, createBookCard, addBookToLibrary}
 }
 
 addBookBtn.onclick = function() {
@@ -128,11 +124,10 @@ document.addEventListener("keydown", (e) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault()
 
-  const book = new Book(title.value, author.value, pageCount.value, readStatus.checked)
+  const book = Book(title.value, author.value, pageCount.value, readStatus.checked)
   book.addBookToLibrary()
   modal.style.display = "none";
   form.reset()
-  console.log(book)
 
   book.createBookCard()
 })
@@ -144,7 +139,7 @@ generateBooksBtn.addEventListener("click", () => {
   }
 
   for (let i = 0; i < 10; i++) {
-    const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
+    const book = Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
     book.createBookCard()
   }
 
