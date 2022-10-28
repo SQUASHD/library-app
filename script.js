@@ -100,6 +100,7 @@ function createBookCard(book) {
   if (darkThemeToggled) {
     bookCard.classList.add("dark")
     readStatusBtn.classList.add("dark")
+    removeBtn.classList.add("dark")
   }
 
   removeBtn.textContent = "Remove"
