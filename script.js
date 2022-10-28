@@ -29,10 +29,83 @@ function Book(title, author, pageCount, readStatus, generated = false) {
   this.pageCount = pageCount
   this.readStatus = Boolean(readStatus)
   this.generated = generated
-}
 
-function addBookToLibrary(book) {
-  myLibrary.push(book)
+  this.createBookCard = function() {
+    const bookCard = document.createElement("div")
+    bookCard.classList.add("book-card")
+
+    const bookTitle = document.createElement("h2")
+    bookTitle.classList.add("book-title")
+    bookTitle.textContent = `"${this.title}"`
+
+    const bookAuthor = document.createElement("h3")
+    bookAuthor.classList.add("book-author")
+    bookAuthor.textContent = this.author
+
+    const bookPageCount = document.createElement("p")
+    bookPageCount.classList.add("book-page-count")
+    bookPageCount.textContent = this.pageCount + " pages"
+
+    const buttonGroup = document.createElement("div")
+    buttonGroup.classList.add("button-group")
+    const readStatusBtn = document.createElement("div")
+    readStatusBtn.classList.add("book-btn")
+    buttonGroup.appendChild(readStatusBtn)
+    const removeBtn = document.createElement("div")
+    removeBtn.classList.add("book-btn", "remove-button", "button")
+    buttonGroup.appendChild(removeBtn)
+
+    if(this.readStatus) {
+      readStatusBtn.textContent = "Read"
+      readStatusBtn.classList.add("read")
+    }
+    else {
+      readStatusBtn.textContent = "Not Read"
+      readStatusBtn.classList.add("not-read")
+    }
+
+    if (this.generated) {
+      bookCard.classList.add("generated")
+    }
+
+    if (darkThemeToggled) {
+      bookCard.classList.add("dark")
+      readStatusBtn.classList.add("dark")
+      removeBtn.classList.add("dark")
+    }
+
+    removeBtn.textContent = "Remove"
+
+    readStatusBtn.addEventListener("click", () => {
+      toggleReadStatus(readStatusBtn, this);
+    })
+
+    removeBtn.addEventListener("click", () => {
+      bookCard.remove()
+    })
+
+    bookCard.append(bookTitle, bookAuthor, bookPageCount, buttonGroup)
+    booksGrid.appendChild(bookCard)
+
+    function toggleReadStatus(readStatusBtn, book) {
+      if (readStatusBtn.classList.contains("read")) {
+        readStatusBtn.textContent = "Not Read";
+        readStatusBtn.classList.remove("read");
+        readStatusBtn.classList.add("not-read");
+        book.readStatus = !book.readStatus;
+      }
+      else {
+        readStatusBtn.textContent = "Read";
+        readStatusBtn.classList.remove("not-read");
+        readStatusBtn.classList.add("read");
+        book.readStatus = !book.readStatus;
+      }
+    }
+  }
+
+  this.addBookToLibrary = function() {
+    myLibrary.push(this)
+  }
 }
 
 addBookBtn.onclick = function() {
@@ -56,82 +129,13 @@ form.addEventListener("submit", (e) => {
   e.preventDefault()
 
   const book = new Book(title.value, author.value, pageCount.value, readStatus.checked)
-  addBookToLibrary(book)
+  book.addBookToLibrary()
   modal.style.display = "none";
   form.reset()
   console.log(book)
 
-  createBookCard(book)
+  book.createBookCard()
 })
-
-function createBookCard(book) {
-  const bookCard = document.createElement("div")
-  bookCard.classList.add("book-card")
-  const title = document.createElement("h2")
-  title.textContent = `"${book.title}"`
-  const author = document.createElement("p")
-  author.textContent = book.author
-  const pageCount = document.createElement("p")
-  pageCount.textContent = `${book.pageCount} pages`
-  const readStatus = document.createElement("p")
-  readStatus.textContent = book.readStatus
-
-  const buttonGroup = document.createElement("div")
-  buttonGroup.classList.add("button-group")
-  const readStatusBtn = document.createElement("div")
-  readStatusBtn.classList.add("book-btn")
-  buttonGroup.appendChild(readStatusBtn)
-  const removeBtn = document.createElement("div")
-  removeBtn.classList.add("book-btn", "remove-button", "button")
-  buttonGroup.appendChild(removeBtn)
-
-  if(book.readStatus) {
-    readStatusBtn.textContent = "Read"
-    readStatusBtn.classList.add("read")
-  }
-  else {
-    readStatusBtn.textContent = "Not Read"
-    readStatusBtn.classList.add("not-read")
-  }
-
-  if (book.generated) {
-    bookCard.classList.add("generated")
-  }
-
-  if (darkThemeToggled) {
-    bookCard.classList.add("dark")
-    readStatusBtn.classList.add("dark")
-    removeBtn.classList.add("dark")
-  }
-
-  removeBtn.textContent = "Remove"
-
-  readStatusBtn.addEventListener("click", () => {
-    toggleReadStatus(readStatusBtn, book);
-  })
-
-  removeBtn.addEventListener("click", () => {
-    bookCard.remove()
-  })
-
-  bookCard.append(title, author, pageCount, buttonGroup)
-  booksGrid.append(bookCard)
-}
-
-function toggleReadStatus(readStatusBtn, book) {
-  if (readStatusBtn.classList.contains("read")) {
-    readStatusBtn.textContent = "Not Read";
-    readStatusBtn.classList.remove("read");
-    readStatusBtn.classList.add("not-read");
-    book.readStatus = !book.readStatus;
-  }
-  else {
-    readStatusBtn.textContent = "Read";
-    readStatusBtn.classList.remove("not-read");
-    readStatusBtn.classList.add("read");
-    book.readStatus = !book.readStatus;
-  }
-}
 
 generateBooksBtn.addEventListener("click", () => {
   if (booksGenerated) {
@@ -141,7 +145,7 @@ generateBooksBtn.addEventListener("click", () => {
 
   for (let i = 0; i < 10; i++) {
     const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
-    createBookCard(book)
+    book.createBookCard()
   }
 
   booksGenerated = true;
