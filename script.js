@@ -11,10 +11,9 @@ const themeToggleBtn = document.querySelector(".theme-toggle-button");
 const main = document.querySelector(".main")
 const header = document.querySelector(".header")
 const headerTitle = document.querySelector(".header-title")
-let bookCards = document.querySelectorAll(".book-card");
-let libraryFunctionBtns = document.querySelectorAll("[class*=button]");
 
 const modal = document.getElementById("myModal");
+const modalContent = document.querySelector(".modal-content")
 const form = document.getElementById("add-book-form")
 const submitBtn = document.querySelector(".submit-btn")
 const title = document.getElementById("title")
@@ -139,13 +138,13 @@ generateBooksBtn.addEventListener("click", () => {
     alert("Books already generated")
     return
   }
-  if (!booksGenerated) {
-    for (let i = 0; i < 10; i++) {
-      const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
-      createBookCard(book)
-    }
-    booksGenerated = true;
+
+  for (let i = 0; i < 10; i++) {
+    const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
+    createBookCard(book)
   }
+
+  booksGenerated = true;
   clearGeneratedBooksBtn.style.display = "block"
 })
 
@@ -154,6 +153,7 @@ clearBooksBtn.addEventListener("click", () => {
     alert("No books to clear")
     return
   }
+  
   const confirm = window.confirm("Are you sure you want to clear all books?")
   if (confirm) {
   booksGrid.innerHTML = ""
@@ -176,52 +176,30 @@ logInBtn.addEventListener("click", () => {
   alert("Log in not currently working")
 })
 
-themeToggleBtn.addEventListener("click", () => toggleDarkTheme())
+themeToggleBtn.addEventListener("click", () => toggleDarkMode())
 
-function toggleDarkTheme() {
-  if (darkThemeToggled) {
-    setLightMode();
-  }
-  else {
-    setDarkMode();
-  }
+function toggleDarkMode() {
+  const bookCards = document.querySelectorAll(".book-card");
+  const libraryFunctionBtns = document.querySelectorAll(".button");
+  const darkModeToggleable = document.querySelectorAll(".dark-mode");
+
+  bookCards.forEach(card => card.classList.toggle("dark"));
+  libraryFunctionBtns.forEach(button => button.classList.toggle("dark"));
+  darkModeToggleable.forEach(element => element.classList.toggle("dark"));
+  header.classList.toggle("dark");
+  main.classList.toggle("dark");
+  headerTitle.classList.toggle("dark")
+  modalContent.classList.toggle("dark")
+
+  const toggleTextContent = darkThemeToggled ? "Light Mode" : "Dark Mode";
+  themeToggleBtn.textContent = toggleTextContent;
+  darkThemeToggled = !darkThemeToggled;
 }
 
 window.onload = () => {
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    setDarkMode()
-    console.log("dark")
-  }
-  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    setLightMode()
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
   }
   else {
-    setDarkMode
+    toggleDarkMode()
   }
-}
-
-function setDarkMode() {
-  const bookCards = document.querySelectorAll(".book-card");
-  const libraryFunctionBtns = document.querySelectorAll("[class*=button]");
-  bookCards.forEach(card => card.classList.add("dark"));
-  libraryFunctionBtns.forEach(button => button.classList.add("dark"));
-  header.classList.add("dark");
-  main.classList.add("dark");
-  headerTitle.classList.add("dark");
-
-  darkThemeToggled = true;
-  themeToggleBtn.textContent = "Light Mode";
-}
-
-function setLightMode() {
-  const bookCards = document.querySelectorAll(".book-card");
-  const libraryFunctionBtns = document.querySelectorAll("[class*=button]");
-  bookCards.forEach(card => card.classList.remove("dark"));
-  libraryFunctionBtns.forEach(button => button.classList.remove("dark"));
-  header.classList.remove("dark");
-  main.classList.remove("dark");
-  headerTitle.classList.remove("dark");
-
-  darkThemeToggled = false;
-  themeToggleBtn.textContent = "Dark Mode";
 }
