@@ -5,8 +5,11 @@
   --primary-dark-brown: #593122;
   --primary-medium-brown: #A6633C;
   --primary-light-brown: #D99559;
+
 	--read-color: rgb(78, 194, 103);
+	--read-color-darker: hsl(133, 49%, 45%);
 	--not-read-color: rgb(222, 66, 66);
+	--not-read-color-darker: hsl(0, 49%, 45%);
 }
 
 html, body, div, span, applet, object, iframe,
@@ -196,14 +199,34 @@ p {
 	padding: 4px 0;
 	text-align: center;
 	color: white;
+	cursor: pointer;
 }
 
-.book-btn.read-button {
+.read {
 	background-color: var(--read-color);
+}
+
+.read:hover {
+	background-color: var(--read-color-darker);
+	transform: scale(1.03);
+}
+
+.not-read {
+	background-color: var(--not-read-color);
+}
+
+.not-read:hover {
+	background-color: var(--not-read-color-darker);
+	transform: scale(1.03);
 }
 
 .book-btn.remove-button {
 	background-color: var(--primary-color);
+}
+
+.book-btn.remove-button:hover {
+	background-color: var(--primary-color-darker);
+	transform: scale(1.03);
 }
 
 .footer {
@@ -288,6 +311,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
 	transform: scale(1.01);
+	cursor: pointer;
 }
 
 .is-read {
