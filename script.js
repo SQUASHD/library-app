@@ -11,6 +11,8 @@ const themeToggleBtn = document.querySelector(".theme-toggle-button");
 const main = document.querySelector(".main")
 const header = document.querySelector(".header")
 const headerTitle = document.querySelector(".header-title")
+let bookCards = document.querySelectorAll(".book-card");
+let libraryFunctionBtns = document.querySelectorAll("[class*=button]");
 
 const modal = document.getElementById("myModal");
 const form = document.getElementById("add-book-form")
@@ -177,31 +179,49 @@ logInBtn.addEventListener("click", () => {
 themeToggleBtn.addEventListener("click", () => toggleDarkTheme())
 
 function toggleDarkTheme() {
-  const bookCards = document.querySelectorAll(".book-card");
-  const libraryFunctionBtns = document.querySelectorAll("[class*=button]");
   if (darkThemeToggled) {
-    bookCards.forEach(card => card.classList.remove("dark"));
-    libraryFunctionBtns.forEach(button => button.classList.remove("dark"));
-    header.classList.remove("dark");
-    main.classList.remove("dark");
-    headerTitle.classList.remove("dark");
-
-    darkThemeToggled = false;
-    themeToggleBtn.textContent = "Dark Mode";
+    setLightMode();
   }
   else {
-    bookCards.forEach(card => card.classList.add("dark"));
-    libraryFunctionBtns.forEach(button => button.classList.add("dark"));
-    header.classList.add("dark");
-    main.classList.add("dark");
-    headerTitle.classList.add("dark");
-
-    darkThemeToggled = true;
-    themeToggleBtn.textContent = "Light Mode";
+    setDarkMode();
   }
 }
 
-// on window load toggle dark theme
 window.onload = () => {
-  toggleDarkTheme()
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setDarkMode()
+    console.log("dark")
+  }
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    setLightMode()
+  }
+  else {
+    setDarkMode
+  }
+}
+
+function setDarkMode() {
+  const bookCards = document.querySelectorAll(".book-card");
+  const libraryFunctionBtns = document.querySelectorAll("[class*=button]");
+  bookCards.forEach(card => card.classList.add("dark"));
+  libraryFunctionBtns.forEach(button => button.classList.add("dark"));
+  header.classList.add("dark");
+  main.classList.add("dark");
+  headerTitle.classList.add("dark");
+
+  darkThemeToggled = true;
+  themeToggleBtn.textContent = "Light Mode";
+}
+
+function setLightMode() {
+  const bookCards = document.querySelectorAll(".book-card");
+  const libraryFunctionBtns = document.querySelectorAll("[class*=button]");
+  bookCards.forEach(card => card.classList.remove("dark"));
+  libraryFunctionBtns.forEach(button => button.classList.remove("dark"));
+  header.classList.remove("dark");
+  main.classList.remove("dark");
+  headerTitle.classList.remove("dark");
+
+  darkThemeToggled = false;
+  themeToggleBtn.textContent = "Dark Mode";
 }
