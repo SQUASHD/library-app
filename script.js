@@ -190,7 +190,7 @@ function toggleDarkMode() {
   headerTitle.classList.toggle("dark")
   modalContent.classList.toggle("dark")
 
-  const toggleTextContent = darkThemeToggled ? "Light Mode" : "Dark Mode";
+  const toggleTextContent = darkThemeToggled ? "Dark Mode" : "Light Mode";
   themeToggleBtn.textContent = toggleTextContent;
   darkThemeToggled = !darkThemeToggled;
 }
