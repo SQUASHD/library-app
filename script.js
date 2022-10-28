@@ -174,27 +174,34 @@ logInBtn.addEventListener("click", () => {
   alert("Log in not currently working")
 })
 
-themeToggleBtn.addEventListener("click", () => {
-  const bookCards = document.querySelectorAll(".book-card")
-  const libraryFunctionBtns = document.querySelectorAll("[class*=button]")
+themeToggleBtn.addEventListener("click", () => toggleDarkTheme())
+
+function toggleDarkTheme() {
+  const bookCards = document.querySelectorAll(".book-card");
+  const libraryFunctionBtns = document.querySelectorAll("[class*=button]");
   if (darkThemeToggled) {
-    bookCards.forEach(card => card.classList.remove("dark"))
-    libraryFunctionBtns.forEach(button => button.classList.remove("dark"))
-    header.classList.remove("dark")
-    main.classList.remove("dark")
-    headerTitle.classList.remove("dark")
+    bookCards.forEach(card => card.classList.remove("dark"));
+    libraryFunctionBtns.forEach(button => button.classList.remove("dark"));
+    header.classList.remove("dark");
+    main.classList.remove("dark");
+    headerTitle.classList.remove("dark");
 
     darkThemeToggled = false;
-    themeToggleBtn.textContent = "Dark Mode"
+    themeToggleBtn.textContent = "Dark Mode";
   }
   else {
-    bookCards.forEach(card => card.classList.add("dark"))
-    libraryFunctionBtns.forEach(button => button.classList.add("dark"))
-    header.classList.add("dark")
-    main.classList.add("dark")
-    headerTitle.classList.add("dark")
+    bookCards.forEach(card => card.classList.add("dark"));
+    libraryFunctionBtns.forEach(button => button.classList.add("dark"));
+    header.classList.add("dark");
+    main.classList.add("dark");
+    headerTitle.classList.add("dark");
 
     darkThemeToggled = true;
-    themeToggleBtn.textContent = "Light Mode"
+    themeToggleBtn.textContent = "Light Mode";
   }
-})
+}
+
+// on window load toggle dark theme
+window.onload = () => {
+  toggleDarkTheme()
+}
