@@ -4,6 +4,10 @@
   --primary-accent: #DFE7F2;
 
 	--secondary-color: #262626;
+	--secondary-color-dark: #19AAD9;
+	--secondary-color-dark-darker: hsl(195, 79%, 42%);
+
+	--primary-color-darkmode: #8697A6;
 
 	--read-color: rgb(78, 194, 103);
 	--read-color-darker: hsl(133, 49%, 45%);
@@ -83,7 +87,8 @@ a {
 	box-shadow: 0 3px 6px -6px rgb(91, 91, 91);
 
 	display: grid;
-	grid-template-columns: minmax(10px, 40px) minmax(150px, 400px) 1fr minmax(150px, 400px) minmax(10px, 40px);
+	grid-template-columns: 1fr;
+	grid-template-columns: minmax(10px, 40px) auto 1fr auto auto minmax(10px, 40px);
 	align-items: center;
 }
 
@@ -104,7 +109,17 @@ a {
 	justify-content: end;
 }
 
-div.log-in-button {
+.theme-toggle-container {
+	grid-column: 4 / 5;
+	grid-row: 1;
+	
+	padding: 16px;
+	display: grid;
+	justify-content: end;
+}
+
+.log-in-button,
+.theme-toggle-button {
 	display: grid;
 	justify-content: center;
 	
@@ -114,13 +129,15 @@ div.log-in-button {
 	box-shadow: 0 3px 6px -6px gray;
 }
 
-.log-in-button {
+.log-in-button,
+.theme-toggle-button {
 	color: white;
 	font-weight: 500;
 }
 
 .log-in-button:hover,
-.library-functions-button:hover {
+.library-functions-button:hover,
+.theme-toggle-button:hover {
 	cursor: pointer;
 	transform: scale(1.03);
 	background-color: var(--primary-color-darker);
@@ -356,4 +373,33 @@ input[type="checkbox"]:focus,
 input[type="text"]:focus,
 input[type="number"]:focus {
 	outline: solid 2px var(--primary-color);
+}
+
+.header.dark {
+	background-color: #1E2126;
+}
+
+.header h1.dark {
+	color: white;
+}
+
+.main.dark {
+	background-color: #2b2f39;
+}
+
+.book-card.dark {
+	background-color: #24282e;
+	border-left: 6px solid var(--secondary-color-dark);
+	box-shadow: 0px 24px 38px 3px hsla(0,0%,0%,0.14);
+	color: white;
+}
+
+.button.dark {
+	background-color: var(--secondary-color-dark);
+}
+
+.button.dark:hover {
+	cursor: pointer;
+	transform: scale(1.03);
+	background-color: var(--secondary-color-dark-darker);
 }

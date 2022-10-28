@@ -1,4 +1,5 @@
 let booksGenerated = false;
+let darkThemeToggled = false;
 
 const booksGrid = document.querySelector(".books-grid")
 const addBookBtn = document.querySelector(".add-book-button")
@@ -6,6 +7,10 @@ const generateBooksBtn = document.querySelector(".generate-books-button")
 const clearBooksBtn = document.querySelector(".clear-books-button")
 const clearGeneratedBooksBtn = document.querySelector(".clear-generated-books-button")
 const logInBtn = document.querySelector(".log-in-button")
+const themeToggleBtn = document.querySelector(".theme-toggle-button");
+const main = document.querySelector(".main")
+const header = document.querySelector(".header")
+const headerTitle = document.querySelector(".header-title")
 
 const modal = document.getElementById("myModal");
 const form = document.getElementById("add-book-form")
@@ -76,7 +81,7 @@ function createBookCard(book) {
   readStatusBtn.classList.add("book-btn")
   buttonGroup.appendChild(readStatusBtn)
   const removeBtn = document.createElement("div")
-  removeBtn.classList.add("book-btn", "remove-button")
+  removeBtn.classList.add("book-btn", "remove-button", "button")
   buttonGroup.appendChild(removeBtn)
 
   if(book.readStatus) {
@@ -90,6 +95,11 @@ function createBookCard(book) {
 
   if (book.generated) {
     bookCard.classList.add("generated")
+  }
+
+  if (darkThemeToggled) {
+    bookCard.classList.add("dark")
+    readStatusBtn.classList.add("dark")
   }
 
   removeBtn.textContent = "Remove"
@@ -161,4 +171,29 @@ clearGeneratedBooksBtn.addEventListener("click", () => {
 
 logInBtn.addEventListener("click", () => {
   alert("Log in not currently working")
+})
+
+themeToggleBtn.addEventListener("click", () => {
+  const bookCards = document.querySelectorAll(".book-card")
+  const libraryFunctionBtns = document.querySelectorAll("[class*=button]")
+  if (darkThemeToggled) {
+    bookCards.forEach(card => card.classList.remove("dark"))
+    libraryFunctionBtns.forEach(button => button.classList.remove("dark"))
+    header.classList.remove("dark")
+    main.classList.remove("dark")
+    headerTitle.classList.remove("dark")
+
+    darkThemeToggled = false;
+    themeToggleBtn.textContent = "Dark Mode"
+  }
+  else {
+    bookCards.forEach(card => card.classList.add("dark"))
+    libraryFunctionBtns.forEach(button => button.classList.add("dark"))
+    header.classList.add("dark")
+    main.classList.add("dark")
+    headerTitle.classList.add("dark")
+
+    darkThemeToggled = true;
+    themeToggleBtn.textContent = "Light Mode"
+  }
 })
