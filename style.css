@@ -402,3 +402,27 @@ input[type="number"]:focus {
 	transform: scale(1.03);
 	background-color: var(--secondary-color-dark-darker);
 }
+
+.modal-content.dark {
+  background-color: #2b2f39;
+}
+
+form#add-book-form h3.dark,
+.add-book-form label[for="read-status"].dark {
+	color: white;
+}
+
+input[type="text"].dark,
+input[type="number"].dark,
+button[type="submit"].dark {
+	background-color: #FFFFFF;;
+}
+
+button[type="submit"].dark {
+	background-color: var(--secondary-color-dark);
+	border: none;
+}
+
+button[type="submit"].dark:hover {
+	background-color: var(--secondary-color-dark-darker);
+}
