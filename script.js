@@ -4,6 +4,7 @@ const booksGrid = document.querySelector(".books-grid")
 const addBookBtn = document.querySelector(".add-book-button")
 const generateBooksBtn = document.querySelector(".generate-books-button")
 const clearBooksBtn = document.querySelector(".clear-books-button")
+const clearGeneratedBooksBtn = document.querySelector(".clear-generated-books-button")
 
 const modal = document.getElementById("myModal");
 const form = document.getElementById("add-book-form")
@@ -15,11 +16,12 @@ const readStatus = document.getElementById("read-status")
 
 let myLibrary = []
 
-function Book(title, author, pageCount, readStatus) {
+function Book(title, author, pageCount, readStatus, generated = false) {
   this.title = title
   this.author = author
   this.pageCount = pageCount
   this.readStatus = Boolean(readStatus)
+  this.generated = generated
 }
 
 function addBookToLibrary(book) {
@@ -85,6 +87,10 @@ function createBookCard(book) {
     readStatusBtn.classList.add("not-read")
   }
 
+  if (book.generated) {
+    bookCard.classList.add("generated")
+  }
+
   removeBtn.textContent = "Remove"
 
   readStatusBtn.addEventListener("click", () => {
@@ -117,11 +123,12 @@ function toggleReadStatus(readStatusBtn, book) {
 generateBooksBtn.addEventListener("click", () => {
   if (!booksGenerated) {
     for (let i = 0; i < 10; i++) {
-      const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()))
+      const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
       createBookCard(book)
     }
     booksGenerated = true;
   }
+  clearGeneratedBooksBtn.style.display = "block"
 })
 
 clearBooksBtn.addEventListener("click", () => {
@@ -130,4 +137,15 @@ clearBooksBtn.addEventListener("click", () => {
   booksGrid.innerHTML = ""
   booksGenerated = false;
   }
+  clearGeneratedBooksBtn.style.display = "none"
+})
+
+clearGeneratedBooksBtn.addEventListener("click", () => {
+  const confirm = window.confirm("Are you sure you want to clear all generated books?")
+  if (confirm) {
+    const generatedBooks = document.querySelectorAll(".generated")
+    generatedBooks.forEach(book => book.remove())
+    booksGenerated = false;
+  }
+  clearGeneratedBooksBtn.style.display = "none"
 })

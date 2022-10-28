@@ -130,10 +130,10 @@ div.log-in-button {
 	grid-row: 2 / 3;
 
 	display: grid;
-	grid-template-columns: 1fr repeat(3, auto) 40px;
+	grid-template-columns: 1fr repeat(4, auto) 40px;
 	align-items: center;
 	justify-content: end;
-	gap: 20px;
+	gap: 1vw;
 }
 
 .library-functions-button {
@@ -142,22 +142,27 @@ div.log-in-button {
 	padding: 8px 12px;
 	box-shadow: 0 3px 3px -3px black;
 
-	font-size: 1rem;
+	font-size: clamp(2vw, 1.5vw, 1.2vw);
 	font-weight: 700;
 	color: white;
 	text-align: center;
 }
 
+.clear-generated-books-button {
+	grid-column: -6 / -5;
+	display: none;
+}
+
 .generate-books-button {
-	grid-column: 2 / 3;
+	grid-column: -5 / -4;
 }
 
 .add-book-button {
-	grid-column: 3 / 4;
+	grid-column: -4 / -3;
 }
 
 .clear-books-button {
-	grid-column: 4 / 5;
+	grid-column: -3 / -2;
 }
 
 .books-grid {
