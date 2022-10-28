@@ -83,8 +83,6 @@ function createBookCard(book) {
     bookCard.remove()
   })
 
-
-  
   bookCard.append(title, author, pageCount, buttonGroup)
   booksGrid.append(bookCard)
 }
