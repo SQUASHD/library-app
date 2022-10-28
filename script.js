@@ -5,6 +5,7 @@ const addBookBtn = document.querySelector(".add-book-button")
 const generateBooksBtn = document.querySelector(".generate-books-button")
 const clearBooksBtn = document.querySelector(".clear-books-button")
 const clearGeneratedBooksBtn = document.querySelector(".clear-generated-books-button")
+const logInBtn = document.querySelector(".log-in-button")
 
 const modal = document.getElementById("myModal");
 const form = document.getElementById("add-book-form")
@@ -136,6 +137,10 @@ generateBooksBtn.addEventListener("click", () => {
 })
 
 clearBooksBtn.addEventListener("click", () => {
+  if (booksGrid.children.length === 0) {
+    alert("No books to clear")
+    return
+  }
   const confirm = window.confirm("Are you sure you want to clear all books?")
   if (confirm) {
   booksGrid.innerHTML = ""
@@ -152,4 +157,8 @@ clearGeneratedBooksBtn.addEventListener("click", () => {
     booksGenerated = false;
     clearGeneratedBooksBtn.style.display = "none"
   }
+})
+
+logInBtn.addEventListener("click", () => {
+  alert("Log in not currently working")
 })
