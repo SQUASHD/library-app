@@ -35,11 +35,7 @@ window.onclick = (e) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault()
 
-  if(readStatus.unchecked) {
-    readStatus.value = false
-  }
-
-  const book = new Book(title.value, author.value, pageCount.value, readStatus.value)
+  const book = new Book(title.value, author.value, pageCount.value, readStatus.checked)
   addBookToLibrary(book)
   modal.style.display = "none";
   form.reset()
