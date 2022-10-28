@@ -71,7 +71,7 @@ a {
 	
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 90px 70px 1fr 50px;
+	grid-template-rows: 90px 70px 1fr;
 
 	background-color: var(--primary-accent);
 }
@@ -142,7 +142,7 @@ div.log-in-button {
 	padding: 8px 12px;
 	box-shadow: 0 3px 3px -3px black;
 
-	font-size: clamp(2vw, 1.5vw, 1.2vw);
+	font-size: clamp(12px, 1.5vw, 20px);
 	font-weight: 700;
 	color: white;
 	text-align: center;
@@ -174,7 +174,7 @@ div.log-in-button {
 	gap: 32px;
 	overflow: auto;
 
-	padding: 0 32px;
+	padding:0 32px 10px;
 }
 
 .book-card {
