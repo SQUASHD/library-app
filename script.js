@@ -121,6 +121,10 @@ function toggleReadStatus(readStatusBtn, book) {
 }
 
 generateBooksBtn.addEventListener("click", () => {
+  if (booksGenerated) {
+    alert("Books already generated")
+    return
+  }
   if (!booksGenerated) {
     for (let i = 0; i < 10; i++) {
       const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()), true)
@@ -136,8 +140,8 @@ clearBooksBtn.addEventListener("click", () => {
   if (confirm) {
   booksGrid.innerHTML = ""
   booksGenerated = false;
-  }
   clearGeneratedBooksBtn.style.display = "none"
+  }
 })
 
 clearGeneratedBooksBtn.addEventListener("click", () => {
@@ -146,6 +150,6 @@ clearGeneratedBooksBtn.addEventListener("click", () => {
     const generatedBooks = document.querySelectorAll(".generated")
     generatedBooks.forEach(book => book.remove())
     booksGenerated = false;
+    clearGeneratedBooksBtn.style.display = "none"
   }
-  clearGeneratedBooksBtn.style.display = "none"
 })
