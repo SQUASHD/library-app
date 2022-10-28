@@ -1,5 +1,9 @@
+let booksGenerated = false;
+
 const booksGrid = document.querySelector(".books-grid")
 const addBookBtn = document.querySelector(".add-book-button")
+const generateBooksBtn = document.querySelector(".generate-books-button")
+const clearBooksBtn = document.querySelector(".clear-books-button")
 
 const modal = document.getElementById("myModal");
 const form = document.getElementById("add-book-form")
@@ -102,3 +106,21 @@ function toggleReadStatus(readStatusBtn, book) {
     book.readStatus = !book.readStatus;
   }
 }
+
+generateBooksBtn.addEventListener("click", () => {
+  if (!booksGenerated) {
+    for (let i = 0; i < 10; i++) {
+      const book = new Book(`Book ${i + 1}`, `Author ${i + 1}`, Math.floor(Math.random() * 1000), Math.round(Math.random()))
+      createBookCard(book)
+    }
+    booksGenerated = true;
+  }
+})
+
+clearBooksBtn.addEventListener("click", () => {
+  const confirm = window.confirm("Are you sure you want to clear all books?")
+  if (confirm) {
+  booksGrid.innerHTML = ""
+  booksGenerated = false;
+  }
+})

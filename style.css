@@ -71,7 +71,7 @@ a {
 	
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 90px 100px 1fr 50px;
+	grid-template-rows: 90px 70px 1fr 50px;
 
 	background-color: var(--primary-accent);
 }
@@ -120,29 +120,44 @@ div.log-in-button {
 }
 
 .log-in-button:hover,
-.add-book-button:hover {
+.library-functions-button:hover {
 	cursor: pointer;
 	transform: scale(1.03);
 	background-color: var(--primary-color-darker);
 }
 
-.add-book-row {
+.library-functions-row {
 	grid-row: 2 / 3;
 
 	display: grid;
+	grid-template-columns: 1fr repeat(3, auto) 40px;
 	align-items: center;
-	justify-content: center;
+	justify-content: end;
+	gap: 20px;
+}
+
+.library-functions-button {
+	background-color: var(--primary-color);
+	border-radius: 14px;
+	padding: 8px 12px;
+	box-shadow: 0 3px 3px -3px black;
+
+	font-size: 1rem;
+	font-weight: 700;
+	color: white;
+	text-align: center;
+}
+
+.generate-books-button {
+	grid-column: 2 / 3;
 }
 
 .add-book-button {
-	background-color: var(--primary-color);
-	border-radius: 14px;
-	padding: 14px 20px;
-	box-shadow: 0 3px 3px -3px black;
+	grid-column: 3 / 4;
+}
 
-	font-size: 28px;
-	font-weight: 700;
-	color: white;
+.clear-books-button {
+	grid-column: 4 / 5;
 }
 
 .books-grid {
