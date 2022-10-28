@@ -2,9 +2,8 @@
   --primary-color: #8697A6;
 	--primary-color-darker: hsl(208, 15%, 49%);
   --primary-accent: #DFE7F2;
-  --primary-dark-brown: #593122;
-  --primary-medium-brown: #A6633C;
-  --primary-light-brown: #D99559;
+
+	--secondary-color: #262626;
 
 	--read-color: rgb(78, 194, 103);
 	--read-color-darker: hsl(133, 49%, 45%);
@@ -169,7 +168,7 @@ div.log-in-button {
 	background-color: white;
 	border-radius: 8px;
 	box-shadow: 0 4px 4px -4px gray;
-	border-left: 6px solid var(--primary-medium-brown);
+	border-left: 6px solid var(--secondary-color);
 	
 	text-align: center;
 	font-size: 18px;
