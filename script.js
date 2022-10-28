@@ -178,6 +178,7 @@ logInBtn.addEventListener("click", () => {
 themeToggleBtn.addEventListener("click", () => toggleDarkMode())
 
 function toggleDarkMode() {
+  darkThemeToggled = !darkThemeToggled;
   const bookCards = document.querySelectorAll(".book-card");
   const libraryFunctionBtns = document.querySelectorAll(".button");
   const darkModeToggleable = document.querySelectorAll(".dark-mode");
@@ -190,9 +191,8 @@ function toggleDarkMode() {
   headerTitle.classList.toggle("dark")
   modalContent.classList.toggle("dark")
 
-  const toggleTextContent = darkThemeToggled ? "Dark Mode" : "Light Mode";
+  const toggleTextContent = darkThemeToggled ? "Light Mode" : "Dark Mode";
   themeToggleBtn.textContent = toggleTextContent;
-  darkThemeToggled = !darkThemeToggled;
 }
 
 window.onload = () => {
